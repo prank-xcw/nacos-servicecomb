@@ -1,0 +1,52 @@
+servicecomb:
+  service:
+    application: nacos-servicecomb
+    name: base-service
+    version: @project.version@
+   # environment: development
+  references:
+    version-rule: @project.version@
+  rest:
+    address: 0.0.0.0:9093
+  highway:
+    address: 0.0.0.0:9094
+
+
+spring:
+  profiles:
+    active: nacos # 注册中心类型：servicecomb 或者 nacos
+
+---
+spring:
+  config:
+    activate:
+      on-profile: servicecomb
+servicecomb:
+  # 注册发现
+  registry:
+    sc:
+      address: http://127.0.0.1:30100
+  # 动态配置
+#  kie:
+#    serverUri: http://127.0.0.1:30110
+
+---
+spring:
+  config:
+    activate:
+      on-profile: nacos
+servicecomb:
+  # 注册发现 参考官网地址：https://servicecomb.apache.org/references/java-chassis/zh_CN/registry/nacos.html
+  registry:
+    nacos:
+      serverAddr: http://127.0.0.1:8848
+      username: nacos
+      password: nacos
+  # 动态配置 参考官网地址：https://servicecomb.apache.org/references/java-chassis/zh_CN/config/config-service.html
+  nacos:
+    serverAddr: http://127.0.0.1:8848
+    username: nacos
+    password: nacos
+
+
+

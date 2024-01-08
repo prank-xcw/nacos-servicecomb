@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.learn.nacos-servicecomb</groupId>
+    <artifactId>nacos-servicecomb-parent</artifactId>
+    <version>0.0.1</version>
+    <packaging>pom</packaging>
+    <name>nacos servicecomb parent</name>
+    <description>nacos-servicecomb-parent</description>
+
+
+    <modules>
+        <module>api</module>
+        <module>service</module>
+        <module>web</module>
+    </modules>
+
+    <properties>
+        <java.version>17</java.version>
+        <servicecomb.version>3.0.0</servicecomb.version>
+        <spring-boot-maven-plugin.version>3.1.3</spring-boot-maven-plugin.version>
+        <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.apache.servicecomb</groupId>
+                <artifactId>java-chassis-dependencies</artifactId>
+                <version>${servicecomb.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
+    <dependencies>
+        <!-- 日志框架-->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+
+
+        <!-- 基本涵盖了开发Java-Chassis微服务所需的全部依赖项-->
+        <dependency>
+            <groupId>org.apache.servicecomb</groupId>
+            <artifactId>solution-basic</artifactId>
+        </dependency>
+
+        <!-- nacos注册中心 -->
+        <dependency>
+            <groupId>org.apache.servicecomb</groupId>
+            <artifactId>registry-nacos</artifactId>
+        </dependency>
+        <!-- nacos配置中心-->
+        <dependency>
+            <groupId>org.apache.servicecomb</groupId>
+            <artifactId>config-nacos</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.servicecomb</groupId>
+            <artifactId>java-chassis-spring-boot-starter-standalone</artifactId>
+        </dependency>
+
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.servicecomb</groupId>-->
+        <!--            <artifactId>java-chassis-spring-boot-starter-servlet</artifactId>-->
+        <!--        </dependency>-->
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+
+        <!--        2.8.3版本 -->
+        <dependency>
+            <groupId>org.apache.servicecomb</groupId>
+            <artifactId>solution-basic</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.servicecomb</groupId>
+            <artifactId>registry-service-center</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.servicecomb</groupId>
+            <artifactId>servicestage-environment</artifactId>
+        </dependency>
+        -->
+
+    </dependencies>
+
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.8.1</version>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                        <compilerArgument>-parameters</compilerArgument>
+                        <encoding>UTF-8</encoding>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <configuration>
+                        <excludes>
+                            <exclude>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                            </exclude>
+                        </excludes>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+
+    <repositories>
+        <repository>
+            <id>nexus-aliyun</id>
+            <name>Nexus aliyun</name>
+            <url>https://maven.aliyun.com/repository/central</url>
+        </repository>
+    </repositories>
+
+</project>
